@@ -512,3 +512,23 @@ class MapSequence:
         Return all the meta objects as a list.
         """
         return [m.meta for m in self.maps]
+
+    def save(self, filepath, filetype='auto', **kwargs):
+        """Saves the SunPy Map object to a file.
+
+
+        Parameters
+        ----------
+        filepath : str
+            Location to save file to.
+        filetype : str
+            'auto' or any supported file extension.
+        hdu_type: None, `~fits.CompImageHDU`
+            `None` will return a normal FITS file.
+            `~fits.CompImageHDU` will rice compress the FITS file.
+        kwargs :
+            Any additional keyword arguments are passed to
+            `~sunpy.io.write_file`.
+        """
+        io.write_file(filepath, self.data, self.meta, filetype=filetype,
+                      **kwargs)
